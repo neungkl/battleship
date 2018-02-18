@@ -4,6 +4,7 @@
 
 .logs {
   min-height: 150px;
+  max-height: 300px;
   overflow-y: scroll;
 }
 
@@ -14,6 +15,14 @@
   border: 1px solid #111;
 }
 
+.cell-black {
+  background: #111;
+}
+
 .cell-grey {
   background: #888;
+}
+
+.cell-red {
+  background: rgb(177, 9, 9);
 }

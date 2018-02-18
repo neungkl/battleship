@@ -49,7 +49,7 @@ class Ship {
 
   isInBoardArea(boardSize) {
     const positions = this.positionList();
-    for (let i = 0; i < positions; i += 1) {
+    for (let i = 0; i < positions.length; i += 1) {
       const pos = positions[i];
       if (pos.x < 0 || pos.y < 0 || pos.x >= boardSize || pos.y >= boardSize) {
         return false;

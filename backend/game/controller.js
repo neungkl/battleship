@@ -92,10 +92,8 @@ const constructBoard = () => (
         });
         saveList.push(shipObj.save());
 
-        console.log('=========')
         const shipPos = ship.positionList();
         for (let j = 0; j < shipPos.length; j += 1) {
-          console.log(shipPos[j].x, shipPos[j].y);
           saveList.push(CellModel.findOneAndUpdate(
             { x: shipPos[j].x, y: shipPos[j].y },
             { ship: shipObj, status: cellType.SHIP },

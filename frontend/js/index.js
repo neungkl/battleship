@@ -20,8 +20,35 @@ var game = (function() {
 }());
 
 var renderer = (function() {
+
   var cellClick = function(x, y) {
-    console.log(x, y);
+    $.post({ url: './api/attack', data: { x: x, y: y }}, function(res) {
+      if (!res.ok) {
+        alert('Error: ' + res.message);
+      }
+
+      var data = res.data;
+      $('.cell-' + y + '-' + x)
+        .removeClass('cell-red cell-black cell-grey')
+        .addClass(
+          cellColor(data)
+        );
+
+      crawlLog();
+    });
+  }
+
+  var cellColor = function(status) {
+    switch(status) {
+      case 'sink':
+        return 'cell-red';
+      case 'ship':
+        return 'cell-black';
+      case 'searched':
+        return 'cell-grey';
+      default:
+        return '';
+    }
   }
 
   var render = function(board) {
@@ -32,8 +59,11 @@ var renderer = (function() {
         var $td = $('<td>');
 
         $td.addClass('cell');
+        $td.addClass('cell-' + i + '-' + j);
         if (board[i][j].status !== 'blank') {
-          $td.addClass('cell-grey');
+          $td.addClass(
+            cellColor(board[i][j].status)
+          );
         }
 
         $td.click(function() {
@@ -83,6 +113,20 @@ function crawData() {
   });
 }
 
+function crawlLog() {
+  $.get({ url: './api/log' }, function(res) {
+    if (!res.ok) {
+      alert('Error: ' + data.message);
+      return ;
+    }
+
+    var data = res.data;
+    console.log(data);
+    $('.logs').html(data.map(x => '<div>' + x.message + '</div>').join(''));    
+  });
+}
+
 $(function() {
   crawData();
+  crawlLog();
 });
