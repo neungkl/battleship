@@ -19,6 +19,7 @@ const cellSchema = new Schema({
   },
   ship: {
     type: Schema.Types.ObjectId,
+    ref: 'Ship',
   },
 });
 

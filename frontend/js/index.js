@@ -2,23 +2,6 @@
 
 var BOARD_SIZE = 10;
 
-var game = (function() {
-  var board;
-
-  var setBoard = function(b) {
-    board = b;
-  }
-
-  var getBoard = function() {
-    board;
-  }
-
-  return {
-    setBoard: setBoard,
-    getBoard: getBoard
-  }
-}());
-
 var renderer = (function() {
 
   var cellClick = function(x, y) {
@@ -92,6 +75,12 @@ function crawData() {
     }
 
     var data = res.data;
+
+    if (data.length === 0) {
+      $('.game-area').html('Click "Reset Game" to start the game.')
+      return ;
+    }
+
     var board = [];
     for (let i = 0; i < BOARD_SIZE; i++) {
       board.push([]);
@@ -108,7 +97,6 @@ function crawData() {
         });
       }
     }
-    game.setBoard(board);
     renderer.render(board);
   });
 }
@@ -126,7 +114,23 @@ function crawlLog() {
   });
 }
 
+function resetGame() {
+  if(confirm('Are you sure to reset game?')) {
+    $.post({ url: './api/reset-game' }, function(res) {
+      if (!res.ok) {
+        alert('Error: ' + data.message);
+        return ;
+      }
+
+      crawData();
+      crawlLog();
+    })
+  }
+}
+
 $(function() {
   crawData();
   crawlLog();
+
+  $('.reset-btn').click(resetGame);
 });
