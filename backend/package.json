@@ -4,7 +4,8 @@
   "description": "Battleship game",
   "scripts": {
     "start": "nodemon ./main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\""
   },
   "author": "Kosate Limpongsa",
   "license": "MIT",
@@ -14,6 +15,13 @@
     "mongoose": "^5.0.6"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.6.1",
+    "mocha": "^5.0.1",
     "nodemon": "^1.15.0"
   }
 }
