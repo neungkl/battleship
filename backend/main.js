@@ -5,6 +5,6 @@ const app = express();
 
 mongoose.connect('mongodb://db/battleship');
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.use('/api/', require('./routes/index'));
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));

@@ -1,6 +1,6 @@
-const cellModel = require('../model/cell');
-const logModel = require('../model/log');
-const shipModel = require('../model/ship');
+const CellModel = require('../model/cell');
+const LogModel = require('../model/log');
+const ShipModel = require('../model/ship');
 
 const Ship = require('./ship');
 const shipType = require('./ship.type');
@@ -14,12 +14,12 @@ const shipConfiguration = [
   [shipType.SUBMARINE, 4],
 ];
 
-const resetGame = () => (
-  Promise.all(
-    cellModel.remove({}),
-    logModel.remove({}),
-    shipModel.remove({}),
-  )
+const clearGame = () => (
+  Promise.all([
+    CellModel.remove({}),
+    LogModel.remove({}),
+    ShipModel.remove({}),
+  ])
 );
 
 const randomCorrectShip = (shipPool, newShipType) => {
@@ -58,9 +58,22 @@ const randomBoardPosition = (shipConfig) => {
 };
 
 const constructBoard = () => (
-  resetGame().then(() => (
+  clearGame().then(() => (
     randomBoardPosition(shipConfiguration)
-  ))
+  )).then((ships) => {
+    const saveList = [];
+    for (let i = 0; i < ships.length; i += 1) {
+      const ship = ships[i];
+      const shipObj = new ShipModel({
+        x: ship.x,
+        y: ship.y,
+        direction: ship.direction,
+        type: ship.type,
+      });
+      saveList.push(shipObj.save());
+    }
+    return Promise.all(saveList);
+  })
 );
 
 module.exports = {
