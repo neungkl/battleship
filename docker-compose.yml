@@ -3,6 +3,12 @@ services:
   web:
     build: backend
     ports:
-    - "8000:3000"
+      - "8000:3000"
     volumes:
-    - ./backend:/home/battleship/backend
+      - ./backend:/home/battleship/backend
+    links:
+      - db
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
