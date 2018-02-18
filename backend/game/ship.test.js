@@ -96,6 +96,40 @@ describe('Ship', () => {
     });
   });
 
+  describe('isInBoardArea', function() {
+
+    it('should return false when ship is out of area', function() {
+      let shipA = new Ship(-1, 1, dirType.RIGHT, shipType.BATTLESHIP);
+
+      expect(shipA.isInBoardArea(10)).to.be.true;
+    });
+
+    it('should return false when ship is out of area', function() {
+      let shipA = new Ship(7, 1, dirType.RIGHT, shipType.BATTLESHIP);
+
+      expect(shipA.isInBoardArea(10)).to.be.true;
+    });
+
+    it('should return false when ship is out of area', function() {
+      let shipA = new Ship(10, 10, dirType.DOWN, shipType.SUBMARINE);
+
+      expect(shipA.isInBoardArea(5)).to.be.true;
+    });
+
+    it('should return true when ship is in area', function() {
+      let shipA = new Ship(5, 5, dirType.DOWN, shipType.BATTLESHIP);
+
+      expect(shipA.isInBoardArea(10)).to.be.true;
+    });
+
+    it('should return true when ship is in area', function() {
+      let shipA = new Ship(0, 0, dirType.RIGHT, shipType.BATTLESHIP);
+
+      expect(shipA.isInBoardArea(10)).to.be.true;
+    });
+
+  });
+
   describe('collideWith', function() {
     it('should return true when ship is close together', function() {
       let shipA = new Ship(1, 1, dirType.RIGHT, shipType.BATTLESHIP);

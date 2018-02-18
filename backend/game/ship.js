@@ -47,6 +47,17 @@ class Ship {
     return position;
   }
 
+  isInBoardArea(boardSize) {
+    const positions = this.positionList();
+    for (let i = 0; i < positions; i += 1) {
+      const pos = positions[i];
+      if (pos.x < 0 || pos.y < 0 || pos.x >= boardSize || pos.y >= boardSize) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // Check position of current ship. Isn't it near to other ship position.
   collideWith(otherShip) {
     const curPos = this.positionList();
