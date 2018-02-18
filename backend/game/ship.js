@@ -1,5 +1,5 @@
-const shipType = require('./ship.type');
-const dirType = require('./direction.type');
+const shipType = require('./type/ship.type');
+const dirType = require('./type/direction.type');
 const Vector2 = require('./vector2');
 
 class Ship {

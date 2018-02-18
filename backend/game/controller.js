@@ -3,8 +3,8 @@ const LogModel = require('../model/log');
 const ShipModel = require('../model/ship');
 
 const Ship = require('./ship');
-const shipType = require('./ship.type');
-const dirType = require('./direction.type');
+const shipType = require('./type/ship.type');
+const dirType = require('./type/direction.type');
 
 const BOARD_SIZE = 10;
 const shipConfiguration = [
@@ -57,23 +57,41 @@ const randomBoardPosition = (shipConfig) => {
   return shipPool;
 };
 
-const constructBoard = () => (
-  clearGame().then(() => (
-    randomBoardPosition(shipConfiguration)
-  )).then((ships) => {
-    const saveList = [];
-    for (let i = 0; i < ships.length; i += 1) {
-      const ship = ships[i];
-      const shipObj = new ShipModel({
-        x: ship.x,
-        y: ship.y,
-        direction: ship.direction,
-        type: ship.type,
+const initGameBoard = () => {
+  const initCell = [];
+  for (let i = 0; i < BOARD_SIZE; i += 1) {
+    for (let j = 0; j < BOARD_SIZE; j += 1) {
+      const cellObj = new CellModel({
+        x: j,
+        y: i,
+        status: 'blank',
       });
-      saveList.push(shipObj.save());
+      initCell.push(cellObj.save());
     }
-    return Promise.all(saveList);
-  })
+  }
+  return Promise.all(initCell);
+};
+
+const constructBoard = () => (
+  clearGame()
+    .then(initGameBoard)
+    .then(() => (
+      randomBoardPosition(shipConfiguration)
+    ))
+    .then((ships) => {
+      const saveList = [];
+      for (let i = 0; i < ships.length; i += 1) {
+        const ship = ships[i];
+        const shipObj = new ShipModel({
+          x: ship.x,
+          y: ship.y,
+          direction: ship.direction,
+          type: ship.type,
+        });
+        saveList.push(shipObj.save());
+      }
+      Promise.all(saveList);
+    })
 );
 
 module.exports = {

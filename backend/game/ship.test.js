@@ -1,7 +1,7 @@
 const chai = require('chai');
 const Ship = require('./ship');
-const dirType = require('./direction.type');
-const shipType = require('./ship.type');
+const dirType = require('./type/direction.type');
+const shipType = require('./type/ship.type');
 const Vector2 = require('./vector2');
 
 const expect = chai.expect;

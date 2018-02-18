@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const shipType = require('../game/ship.type');
-const directionType = require('../game/direction.type');
+const shipType = require('../game/type/ship.type');
+const directionType = require('../game/type/direction.type');
 
 const { Schema } = mongoose;
 

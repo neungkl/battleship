@@ -8,8 +8,8 @@ router.get('/ping', (req, res) => {
 });
 
 router.post('/reset-game', (req, res) => {
-  gameController.constructBoard().then((data) => {
-    res.json(data);
+  gameController.constructBoard().then(() => {
+    res.json({ status: 'ok' });
   }, (err) => {
     console.error(err);
     res.status(500).json({ status: 'error', message: err });

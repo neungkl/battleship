@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const cellType = require('../game/type/cell.type');
 
 const { Schema } = mongoose;
 
@@ -13,7 +14,7 @@ const cellSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['blank', 'sink', 'searched'],
+    enum: [cellType.BLANK, cellType.SHIP, cellType.SINK, cellType.SEARCHED],
     required: true,
   },
 });

@@ -1,6 +1,6 @@
 const chai = require('chai');
 const controlller = require('./controller');
-const shipType = require('./ship.type');
+const shipType = require('./type/ship.type');
 
 const expect = chai.expect;
 
