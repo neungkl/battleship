@@ -5,6 +5,7 @@ const ShipModel = require('../model/ship');
 const Ship = require('./ship');
 const shipType = require('./type/ship.type');
 const dirType = require('./type/direction.type');
+const cellType = require('./type/cell.type');
 
 const BOARD_SIZE = 10;
 const shipConfiguration = [
@@ -86,9 +87,20 @@ const constructBoard = () => (
           x: ship.x,
           y: ship.y,
           direction: ship.direction,
+          life: ship.length,
           type: ship.type,
         });
         saveList.push(shipObj.save());
+
+        console.log('=========')
+        const shipPos = ship.positionList();
+        for (let j = 0; j < shipPos.length; j += 1) {
+          console.log(shipPos[j].x, shipPos[j].y);
+          saveList.push(CellModel.findOneAndUpdate(
+            { x: shipPos[j].x, y: shipPos[j].y },
+            { ship: shipObj, status: cellType.SHIP },
+          ));
+        }
       }
       Promise.all(saveList);
     })

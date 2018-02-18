@@ -17,6 +17,9 @@ const cellSchema = new Schema({
     enum: [cellType.BLANK, cellType.SHIP, cellType.SINK, cellType.SEARCHED],
     required: true,
   },
+  ship: {
+    type: Schema.Types.ObjectId,
+  },
 });
 
 module.exports = mongoose.model('Cell', cellSchema);

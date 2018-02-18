@@ -18,6 +18,10 @@ const shipSchema = new Schema({
     enum: [directionType.DOWN, directionType.RIGHT],
     required: true,
   },
+  life: {
+    type: Number,
+    required: true,
+  },
   type: {
     type: String,
     enum: [shipType.BATTLESHIP, shipType.CRUISER, shipType.DESTROYER, shipType.SUBMARINE],
