@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const logSchema = new Schema({
   message: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
-export default mongoose.model('Log', logSchema);
+module.exports = mongoose.model('Log', logSchema);

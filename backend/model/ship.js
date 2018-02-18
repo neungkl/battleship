@@ -1,25 +1,28 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const shipType = require('../game/ship.type');
+const directionType = require('../game/direction.type');
+
+const { Schema } = mongoose;
 
 const shipSchema = new Schema({
   x: {
     type: Number,
-    required: true
+    required: true,
   },
   y: {
     type: Number,
-    required: true
+    required: true,
   },
   direction: {
     type: String,
-    enum: ['right', 'down'],
-    required: true
+    enum: [directionType.DOWN, directionType.RIGHT],
+    required: true,
   },
   type: {
     type: String,
-    enum: ['battleship', 'cruiser', 'destroyer', 'submarine'],
-    required: true
-  }
+    enum: [shipType.BATTLESHIP, shipType.CRUISER, shipType.DESTROYER, shipType.SUBMARINE],
+    required: true,
+  },
 });
 
-export default mongoose.model('Ship', shipSchema);
+module.exports = mongoose.model('Ship', shipSchema);
