@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./main.js",
     "lint": "eslint .",
-    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\""
+    "test": "mocha \"./{,!(node_modules)/**/}*.test.js\"",
+    "ci": "npm run-script lint && npm run-script test"
   },
   "author": "Kosate Limpongsa",
   "license": "MIT",
