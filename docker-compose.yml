@@ -6,6 +6,7 @@ services:
       - "8000:3000"
     volumes:
       - ./backend:/home/battleship/backend
+      - ./frontend:/home/battleship/frontend
     links:
       - db
   db:
