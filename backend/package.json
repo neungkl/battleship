@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Battleship game",
   "scripts": {
-    "start": "nodemon ./main.js",
+    "start": "node ./main.js",
+    "dev": "nodemon ./main.js",
     "lint": "eslint .",
     "test": "mocha \"./{,!(node_modules)/**/}*.test.js\"",
     "ci": "npm run-script lint && npm run-script test"

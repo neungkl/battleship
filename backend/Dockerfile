@@ -9,4 +9,6 @@ COPY package-lock.json .
 
 RUN yarn
 
+COPY . .
+
 CMD ["npm", "start"]
